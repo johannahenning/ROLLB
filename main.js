@@ -284,10 +284,12 @@
 		roll(Math.round(30),1000,300);
 		roll(Math.round(30),1000,300);
 		roll(Math.round(30),1000,300);
-		while (true){
-			roll(Math.round(30),10,30);
-
-		}
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
 	};
 
 	elGreen.onclick = function() {
