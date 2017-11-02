@@ -275,7 +275,7 @@
 		elAim.classList.toggle('active');
 	};
 
-	elRed.onclick = function() {
+	elRed.onkeyup = function() {
 		//setColor(255, 0, 0);
 		roll(Math.round(90), 0, 1);
 
