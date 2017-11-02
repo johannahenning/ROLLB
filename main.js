@@ -328,12 +328,5 @@
 	};
 
 
-	keyboardJS.bind('a', roll(0,3,1) {
-		console.log('a is pressed and bb should roll');
-	});
-
-
-
-
 
 }());
