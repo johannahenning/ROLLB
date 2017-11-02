@@ -84,6 +84,8 @@
 		});
 	};
 
+
+
 	const stopRolling = function() {
 		if (state.busy) {
 			setTimeout(stopRolling, 100);
@@ -275,21 +277,9 @@
 
 	elRed.onclick = function() {
 		//setColor(255, 0, 0);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
-		roll(Math.round(30),1000,300);
+		roll(Math.round(90), 0, 1);
+
+
 	};
 
 	elGreen.onclick = function() {
