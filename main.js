@@ -275,7 +275,15 @@
 
 	elRed.onclick = function() {
 		//setColor(255, 0, 0);
-		roll(20,300,1000);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
+		roll(Math.round(30),1000,300);
 	};
 
 	elGreen.onclick = function() {
