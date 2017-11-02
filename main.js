@@ -9,6 +9,9 @@
 		location.protocol = 'https:';
   }
 
+
+
+
 	const elConnect = document.querySelector('#connect');
 	const elStop = document.querySelector('#stop');
 	const elAim = document.querySelector('#aim');
@@ -17,6 +20,7 @@
 	const elGreen = document.querySelector('#green');
 	const elOff = document.querySelector('#off');
 	const elJoypad = document.querySelector('#joypad');
+
 
 	if (navigator.vibrate) {
 		[
@@ -271,6 +275,7 @@
 
 	elRed.onclick = function() {
 		setColor(255, 0, 0);
+		roll(0,3,1);
 	};
 
 	elGreen.onclick = function() {
@@ -321,5 +326,14 @@
 		event.preventDefault();
 		stopRolling();
 	};
+
+
+	keyboardJS.bind('a', roll(0,3,1) {
+		console.log('a is pressed and bb should roll');
+	});
+
+
+
+
 
 }());
