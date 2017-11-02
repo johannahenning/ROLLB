@@ -278,7 +278,7 @@
 	elRed.onclick = function() {
 		//setColor(255, 0, 0);
 
-		for(var i=0;i<16;i++)
+		for(var i=0;i<1600;i++)
 		{
 			roll(Math.round(90), 0, 1);
 		}
