@@ -274,7 +274,7 @@
 	};
 
 	elRed.onclick = function() {
-		setColor(255, 0, 0);
+		//setColor(255, 0, 0);
 		roll(20,300,1000);
 	};
 
