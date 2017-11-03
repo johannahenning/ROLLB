@@ -278,12 +278,11 @@
 
 		} else {
 			setBackLed(0).then(() => setHeading(0));
-
-
 		}
 		elAim.classList.toggle('active');
 	};
 
+// BUTTONS AND FUNKTIONS
 
 	moveBack.onclick = function() {
 		roll(Math.round(0), 30, 1);
@@ -324,41 +323,43 @@
 
 	const radius = 150;
 
-	const handleTouchEvent = function(event) {
-		event.preventDefault();
-		if (event.targetTouches.length == 1) {
-			const touch = event.targetTouches[0];
-			const x = touch.clientX - elJoypad.offsetLeft;
-			const y = touch.pageY - elJoypad.offsetTop;
-			// Notes: x and y are swapped here in order to get clockwise theta from Y-axis.
-			const theta = Math.PI - Math.atan2(x - radius, y - radius);
-			const degrees = theta * (180 / Math.PI);
-			const tx = Math.abs(x - radius);
-			const ty = Math.abs(y - radius);
-			let speed = Math.sqrt(Math.pow(tx, 2) + Math.pow(ty, 2));
-			speed = speed / 150.0 * 255.0;
-			console.log('event: ' + x + ', ' + y + ', d: ' + degrees + ' speed: ' + speed);
-			if (state.aim) {
-				roll(Math.round(degrees), 0, 1);
-			} else {
-				roll(Math.round(degrees), Math.round(speed), 1);
+	/*   CONTROLLS VIA TOUCH (NOT NEEDED)
+
+		const handleTouchEvent = function(event) {
+			event.preventDefault();
+			if (event.targetTouches.length == 1) {
+				const touch = event.targetTouches[0];
+				const x = touch.clientX - elJoypad.offsetLeft;
+				const y = touch.pageY - elJoypad.offsetTop;
+				// Notes: x and y are swapped here in order to get clockwise theta from Y-axis.
+				const theta = Math.PI - Math.atan2(x - radius, y - radius);
+				const degrees = theta * (180 / Math.PI);
+				const tx = Math.abs(x - radius);
+				const ty = Math.abs(y - radius);
+				let speed = Math.sqrt(Math.pow(tx, 2) + Math.pow(ty, 2));
+				speed = speed / 150.0 * 255.0;
+				console.log('event: ' + x + ', ' + y + ', d: ' + degrees + ' speed: ' + speed);
+				if (state.aim) {
+					roll(Math.round(degrees), 0, 1);
+				} else {
+					roll(Math.round(degrees), Math.round(speed), 1);
+				}
 			}
+		};
+
+		elJoypad.ontouchstart = function(event) {
+			handleTouchEvent(event);
+		};
+
+		elJoypad.ontouchmove = function(event) {
+			handleTouchEvent(event);
 		}
-	};
 
-	elJoypad.ontouchstart = function(event) {
-		handleTouchEvent(event);
-	};
-
-	elJoypad.ontouchmove = function(event) {
-		handleTouchEvent(event);
-	}
-
-	elJoypad.ontouchend = function(event) {
-		event.preventDefault();
-		stopRolling();
-	};
-
+		elJoypad.ontouchend = function(event) {
+			event.preventDefault();
+			stopRolling();
+		};
+		*/
 
 
 }());
