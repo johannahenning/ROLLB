@@ -108,10 +108,17 @@ button {
 	background: pink;
 }
 
+.button-led-violett::before {
+	background: #8a2be2;
+}
+
+.button-led-black::before {
+	background: black;
+}
+
 .button-led-olive::before {
 	background: olive;
 }
-
 
 .button-led-off::before {
 	background: #9fa2a9;

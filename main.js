@@ -22,6 +22,8 @@
 	const elJoypad = document.querySelector('#joypad');
 	const moveFront = document.querySelector('#front');
 	const moveBack = document.querySelector('#back');
+	const moveLeft = document.querySelector('#left');
+	const moveRight = document.querySelector('#right');
 
 
 
@@ -281,25 +283,25 @@
 		elAim.classList.toggle('active');
 	};
 
-	elRed.onclick = function() {
-		//setColor(255, 0, 0);
-
-		roll(Math.round(10), 100, 1);
-
-	};
 
 	moveBack.onclick = function() {
-		//setColor(255, 0, 0);
-
 		roll(Math.round(0), 30, 1);
-
 	};
 
 	moveFront.onclick = function() {
-		//setColor(255, 0, 0);
-
 		roll(Math.round(180), 30, 1);
+	};
 
+	moveLeft.onclick = function() {
+		roll(Math.round(90), 30, 1);
+	};
+
+	moveRight.onclick = function() {
+		roll(Math.round(270), 30, 1);
+	};
+
+	elRed.onclick = function() {
+		setColor(255, 0, 0);
 	};
 
 	elGreen.onclick = function() {
@@ -312,7 +314,6 @@
 
 	elOff.onclick = function() {
 		stopRolling();
-
 	};
 
 	const radius = 150;
