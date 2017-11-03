@@ -29,7 +29,7 @@
 
 	if (navigator.vibrate) {
 		[
-			elConnect, elStop, elAim, elRed, elBlue,
+			elConnect, elAim, elRed, elBlue,
 			elGreen, elOff, moveFront, moveBack
 		].forEach(function(element) {
 			element.addEventListener('touchstart', function(event) {
