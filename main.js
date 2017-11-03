@@ -95,13 +95,16 @@
 			roll(Math.round(180), 30, 1);
 			setTimeout(function() {
 				roll(Math.round(90), 30, 1);
-			}, 4000);
+			}, 1000);
 			setTimeout(function() {
 				roll(Math.round(0), 30, 1);
-			}, 6000);
+			}, 2000);
 			setTimeout(function() {
 				roll(Math.round(270), 30, 1);
-			}, 8000);
+			}, 3000);
+			setTimeout(function() {
+				stopRolling;
+			}, 4000);
 	}
 
 	const stopRolling = function() {
