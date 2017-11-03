@@ -13,7 +13,6 @@
 
 
 	const elConnect = document.querySelector('#connect');
-	const elStop = document.querySelector('#stop');
 	const elAim = document.querySelector('#aim');
 	const elRed = document.querySelector('#red');
 	const elBlue = document.querySelector('#blue');
@@ -269,10 +268,6 @@
 
 	elConnect.onclick = function() {
 		connect();
-	};
-
-	elStop.onclick = function() {
-		stopRolling();
 	};
 
 	elAim.onclick = function() {
