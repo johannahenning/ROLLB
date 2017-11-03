@@ -89,7 +89,10 @@
 	});
 	};
 
+	//MOVE IN A SQUARE
 
+		const square = function(heading, speed, rollState) {
+	}
 
 	const stopRolling = function() {
 		if (state.busy) {
@@ -193,7 +196,7 @@
 		const wakeCpuCharacteristicId = '22bb746f-2bbf-7554-2d6f-726568705327';
 		navigator.bluetooth.requestDevice({
 			//'acceptAllDevices': [true],
-			'filters': [{ 'namePrefix': ['BB-'] }],
+			'filters': [{ 'namePrefix': ['BB'] }],
 			'optionalServices': [
 				serviceA,
 				serviceB
@@ -305,6 +308,7 @@
 
 	elGreen.onclick = function() {
 		setColor(0, 255, 0);
+		//square();
 	};
 
 	elBlue.onclick = function() {
