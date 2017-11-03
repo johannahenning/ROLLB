@@ -92,6 +92,18 @@
 	//MOVE IN A SQUARE
 
 		const square = function(heading, speed, rollState) {
+			setTimeout(function() {
+				roll(Math.round(180), 30, 1);
+			}, 2000);
+			setTimeout(function() {
+				roll(Math.round(90), 30, 1);
+			}, 4000);
+			setTimeout(function() {
+				roll(Math.round(0), 30, 1);
+			}, 6000);
+			setTimeout(function() {
+				roll(Math.round(270), 30, 1);
+			}, 8000);
 	}
 
 	const stopRolling = function() {
@@ -176,6 +188,7 @@
 	};
 
 	// CODE BASED ON https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
+	// CONNECT VIA BLUTOOTH
 
 	function connect() {
 		if (!navigator.bluetooth) {
@@ -183,8 +196,6 @@
 				'Please make sure the Web Bluetooth flag is enabled.');
 			return;
 		}
-
-		//SEACHING ROLLB VIA BLUETOOTH
 
 		console.log('Requesting RollB…');
 
@@ -195,7 +206,6 @@
 		const txPowerCharacteristicId = '22bb746f-2bb2-7554-2d6f-726568705327';
 		const wakeCpuCharacteristicId = '22bb746f-2bbf-7554-2d6f-726568705327';
 		navigator.bluetooth.requestDevice({
-			//'acceptAllDevices': [true],
 			'filters': [{ 'namePrefix': ['BB'] }],
 			'optionalServices': [
 				serviceA,
@@ -307,8 +317,8 @@
 	};
 
 	elGreen.onclick = function() {
-		setColor(0, 255, 0);
-		//square();
+		//setColor(0, 255, 0);
+		square();
 	};
 
 	elBlue.onclick = function() {
