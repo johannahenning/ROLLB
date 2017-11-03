@@ -24,6 +24,7 @@
 	const moveBack = document.querySelector('#back');
 	const moveLeft = document.querySelector('#left');
 	const moveRight = document.querySelector('#right');
+	const makeSound = document.querySelector('#sound');
 
 
 
@@ -315,6 +316,11 @@
 	elOff.onclick = function() {
 		stopRolling();
 	};
+
+	makeSound.onclick = function() {
+		var audio = new Audio('SampleAudio.mp3');
+		audio.play();
+	}
 
 	const radius = 150;
 

@@ -122,6 +122,10 @@ button {
 	background: black;
 }
 
+.button-led-white::before {
+	background: white;
+}
+
 .button-led-olive::before {
 	background: olive;
 }
