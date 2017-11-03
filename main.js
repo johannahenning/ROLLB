@@ -92,9 +92,7 @@
 	//MOVE IN A SQUARE
 
 		const square = function(heading, speed, rollState) {
-			setTimeout(function() {
-				roll(Math.round(180), 30, 1);
-			}, 2000);
+			roll(Math.round(180), 30, 1);
 			setTimeout(function() {
 				roll(Math.round(90), 30, 1);
 			}, 4000);
