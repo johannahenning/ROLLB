@@ -38,6 +38,12 @@ h1 {
 	margin-bottom: 0;
 }
 
+h2 {
+	text-align: center;
+	font-size: 1.3rem;
+	margin-bottom: 0;
+}
+
 h1 span {
 	display: inline-block;
 	padding-bottom: 0.5em;
@@ -52,7 +58,7 @@ button {
 }
 
 .button-connect {
-	background: #2f453f;
+	background: #ff9900;
 	border-color: #628068;
 }
 
