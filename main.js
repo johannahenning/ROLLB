@@ -173,7 +173,8 @@
 	});
 	};
 
-	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
+	// CODE BASED ON https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
+
 	function connect() {
 		if (!navigator.bluetooth) {
 			console.log('Web Bluetooth API is not available.\n' +
@@ -181,7 +182,9 @@
 			return;
 		}
 
-		console.log('Requesting BB-8…');
+		//SEACHING ROLLB VIA BLUETOOTH
+
+		console.log('Requesting RollB…');
 
 		const serviceA = '22bb746f-2bb0-7554-2d6f-726568705327';
 		const serviceB = '22bb746f-2ba0-7554-2d6f-726568705327';
@@ -190,7 +193,8 @@
 		const txPowerCharacteristicId = '22bb746f-2bb2-7554-2d6f-726568705327';
 		const wakeCpuCharacteristicId = '22bb746f-2bbf-7554-2d6f-726568705327';
 		navigator.bluetooth.requestDevice({
-			'filters': [{ 'namePrefix': ['BB'] }],
+			//'acceptAllDevices': [true],
+			'filters': [{ 'namePrefix': ['BB-'] }],
 			'optionalServices': [
 				serviceA,
 				serviceB
