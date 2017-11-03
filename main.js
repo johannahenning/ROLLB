@@ -7,7 +7,7 @@
 		location.protocol != 'https:'
 	) {
 		location.protocol = 'https:';
-  }
+	}
 
 
 
@@ -20,12 +20,15 @@
 	const elGreen = document.querySelector('#green');
 	const elOff = document.querySelector('#off');
 	const elJoypad = document.querySelector('#joypad');
+	const moveFront = document.querySelector('#front');
+	const moveBack = document.querySelector('#back');
+
 
 
 	if (navigator.vibrate) {
 		[
 			elConnect, elStop, elAim, elRed, elBlue,
-			elGreen, elOff
+			elGreen, elOff, moveFront, moveBack
 		].forEach(function(element) {
 			element.addEventListener('touchstart', function(event) {
 				navigator.vibrate(15);
@@ -57,10 +60,10 @@
 
 		sendCommand(did, cid, data).then(() => {
 			state.busy = false;
-		})
-		.catch(exception => {
+	})
+	.catch(exception => {
 			console.log(exception);
-		});
+	});
 	};
 
 	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
@@ -78,10 +81,10 @@
 		const data = new Uint8Array([speed, heading >> 8, heading & 0xFF, rollState]);
 		sendCommand(did, cid, data).then(() => {
 			state.busy = false;
-		})
-		.catch(exception => {
+	})
+	.catch(exception => {
 			console.log(exception);
-		});
+	});
 	};
 
 
@@ -101,10 +104,10 @@
 		]);
 		sendCommand(did, cid, data).then(() => {
 			state.busy = false;
-		})
-		.catch(exception => {
+	})
+	.catch(exception => {
 			console.log(exception);
-		});
+	});
 	};
 
 	const setBackLed = function(brightness) {
@@ -130,10 +133,10 @@
 		const data = new Uint8Array([r, g, b, 0]);
 		sendCommand(did, cid, data).then(() => {
 			state.busy = false;
-		})
-		.catch(exception => {
+	})
+	.catch(exception => {
 			console.log(exception);
-		});
+	});
 	};
 
 	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
@@ -151,7 +154,7 @@
 		const dlen = data.byteLength + 1;
 		const sum = data.reduce((a, b) => {
 			return a + b;
-		});
+	});
 		// Checksum
 		const chk = ((sum + did + cid + seq + dlen) & 0xFF) ^ 0xFF;
 		const checksum = new Uint8Array([chk]);
@@ -164,7 +167,7 @@
 		console.log('Sending', array);
 		return controlCharacteristic.writeValue(array).then(() => {
 			console.log('Command write done.');
-		});
+	});
 	};
 
 	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
@@ -190,71 +193,71 @@
 				serviceB
 			]
 		})
-		.then(device => {
+			.then(device => {
 			console.log('Got device: ' + device.name);
-			return device.gatt.connect();
-		})
-		.then(server => {
+		return device.gatt.connect();
+	})
+	.then(server => {
 			console.log('Got server');
-			gattServer = server;
-			return gattServer.getPrimaryService(serviceA);
-		})
-		.then(service => {
+		gattServer = server;
+		return gattServer.getPrimaryService(serviceA);
+	})
+	.then(service => {
 			console.log('Got service');
-			// Developer mode sequence is sent to the radio service
-			radioService = service;
-			// Get Anti DOS characteristic
-			return radioService.getCharacteristic(antiDosCharacteristicId);
-		})
-		.then(characteristic => {
+		// Developer mode sequence is sent to the radio service
+		radioService = service;
+		// Get Anti DOS characteristic
+		return radioService.getCharacteristic(antiDosCharacteristicId);
+	})
+	.then(characteristic => {
 			console.log('> Found Anti DOS characteristic');
-			// Send special string
-			let bytes = new Uint8Array('011i3'.split('').map(c => c.charCodeAt()));
-			return characteristic.writeValue(bytes).then(() => {
-				console.log('Anti DOS write done.');
-			})
-		})
-		.then(() => {
+		// Send special string
+		let bytes = new Uint8Array('011i3'.split('').map(c => c.charCodeAt()));
+		return characteristic.writeValue(bytes).then(() => {
+			console.log('Anti DOS write done.');
+	})
+	})
+	.then(() => {
 			// Get TX Power characteristic
 			return radioService.getCharacteristic(txPowerCharacteristicId);
-		})
-		.then(characteristic => {
+	})
+	.then(characteristic => {
 			console.log('> Found TX Power characteristic');
-			const array = new Uint8Array([0x07]);
-			return characteristic.writeValue(array).then(() => {
-				console.log('TX Power write done.');
-			})
-		})
-		.then(() => {
+		const array = new Uint8Array([0x07]);
+		return characteristic.writeValue(array).then(() => {
+			console.log('TX Power write done.');
+	})
+	})
+	.then(() => {
 			// Get Wake CPU characteristic
 			return radioService.getCharacteristic(wakeCpuCharacteristicId);
-		})
-		.then(characteristic => {
+	})
+	.then(characteristic => {
 			console.log('> Found Wake CPU characteristic');
-			const array = new Uint8Array([0x01]);
-			return characteristic.writeValue(array).then(() => {
-				console.log('Wake CPU write done.');
-			})
-		})
-		.then(() => {
+		const array = new Uint8Array([0x01]);
+		return characteristic.writeValue(array).then(() => {
+			console.log('Wake CPU write done.');
+	})
+	})
+	.then(() => {
 			// Get robot service
 			return gattServer.getPrimaryService(serviceB)
 		})
-		.then(service => {
+	.then(service => {
 			// Commands are sent to the robot service
 			robotService = service;
-			// Get Control characteristic
-			return robotService.getCharacteristic(controlCharacteristicId);
-		})
-		.then(characteristic => {
+		// Get Control characteristic
+		return robotService.getCharacteristic(controlCharacteristicId);
+	})
+	.then(characteristic => {
 			console.log('> Found Control characteristic');
-			// Cache the characteristic
-			controlCharacteristic = characteristic;
-			return setColor(0, 250, 0);
-		})
-		.catch(exception => {
+		// Cache the characteristic
+		controlCharacteristic = characteristic;
+		return setColor(0, 250, 0);
+	})
+	.catch(exception => {
 			console.log(exception);
-		});
+	});
 	};
 
 	elConnect.onclick = function() {
@@ -269,8 +272,11 @@
 		state.aim = !state.aim;
 		if (state.aim) {
 			setBackLed(0xff).then(() => setColor(0, 0, 0));
+
 		} else {
 			setBackLed(0).then(() => setHeading(0));
+
+
 		}
 		elAim.classList.toggle('active');
 	};
@@ -278,10 +284,21 @@
 	elRed.onclick = function() {
 		//setColor(255, 0, 0);
 
-		for(var i=0;i<1600;i++)
-		{
-			roll(Math.round(90), 0, 1);
-		}
+		roll(Math.round(10), 100, 1);
+
+	};
+
+	moveBack.onclick = function() {
+		//setColor(255, 0, 0);
+
+		roll(Math.round(0), 30, 1);
+
+	};
+
+	moveFront.onclick = function() {
+		//setColor(255, 0, 0);
+
+		roll(Math.round(180), 30, 1);
 
 	};
 
@@ -294,7 +311,8 @@
 	};
 
 	elOff.onclick = function() {
-		setColor(0, 0, 0);
+		stopRolling();
+
 	};
 
 	const radius = 150;
