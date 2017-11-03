@@ -104,8 +104,11 @@
 			}, 5000);
 			setTimeout(function() {
 				stopRolling();
+				console.log('stopRolling');
 			}, 7000);
 	}
+
+	//STOP ROLLING
 
 	const stopRolling = function() {
 		if (state.busy) {
