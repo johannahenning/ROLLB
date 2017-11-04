@@ -18,12 +18,14 @@
 	const elBlue = document.querySelector('#blue');
 	const elGreen = document.querySelector('#green');
 	const elOff = document.querySelector('#off');
-	const elJoypad = document.querySelector('#joypad');
+	//const elJoypad = document.querySelector('#joypad');
 	const moveFront = document.querySelector('#front');
 	const moveBack = document.querySelector('#back');
 	const moveLeft = document.querySelector('#left');
 	const moveRight = document.querySelector('#right');
+	const moveSquare = document.querySelector('#square');
 	const makeSound = document.querySelector('#sound');
+	const discoMode = document.querySelector('#disco');
 
 
 
@@ -89,23 +91,50 @@
 	});
 	};
 
-	//MOVE IN A SQUARE
+	//MOVE IN A SQUARE AND STOP
 
-		const square = function(heading, speed, rollState) {
-			roll(Math.round(180), 30, 1);
-			setTimeout(function() {
-				roll(Math.round(90), 30, 1);
-			}, 1000);
-			setTimeout(function() {
-				roll(Math.round(0), 30, 1);
-			}, 3000);
-			setTimeout(function() {
-				roll(Math.round(270), 30, 1);
-			}, 5000);
-			setTimeout(function() {
-				stopRolling();
-				console.log('stopRolling');
-			}, 7000);
+	const square = function(heading, speed, rollState) {
+		roll(Math.round(180), 30, 1);
+		setTimeout(function() {
+			roll(Math.round(90), 30, 1);
+		}, 2000);
+		setTimeout(function() {
+			roll(Math.round(0), 30, 1);
+		}, 4000);
+		setTimeout(function() {
+			roll(Math.round(270), 30, 1);
+		}, 6000);
+		setTimeout(function() {
+			stopRolling();
+			console.log('stopRolling');
+		}, 8000);
+	}
+
+	//DISCO MODE
+
+	const disco = function(heading, speed, rollState) {
+		var audio = new Audio('test.mp3');
+		audio.play();
+		setTimeout(function() {
+			setColor(255, 0, 0);
+			roll(Math.round(180), 60, 1);
+		}, 0);
+		setTimeout(function() {
+			setColor(0, 255, 0);
+			roll(Math.round(0), 60, 1);
+		}, 1000);
+		setTimeout(function() {
+			setColor(0, 0, 255);
+			roll(Math.round(180), 60, 1);
+		}, 2000);
+		setTimeout(function() {
+			setColor(0, 0, 0);
+			roll(Math.round(0), 60, 1);
+		}, 3000);
+		setTimeout(function() {
+			stopRolling();
+			console.log('stopRolling');
+		}, 4000);
 	}
 
 	//STOP ROLLING
@@ -298,7 +327,7 @@
 		elAim.classList.toggle('active');
 	};
 
-// BUTTONS AND FUNKTIONS
+// BUTTONS AND FUNCTIONS
 
 	moveBack.onclick = function() {
 		roll(Math.round(0), 30, 1);
@@ -321,7 +350,7 @@
 	};
 
 	elGreen.onclick = function() {
-		//setColor(0, 255, 0);
+		setColor(0, 255, 0);
 		square();
 	};
 
@@ -333,9 +362,18 @@
 		stopRolling();
 	};
 
+	moveSquare.onclick = function() {
+		square();
+	}
+
 	makeSound.onclick = function() {
-		var audio = new Audio('SampleAudio.mp3');
+		var audio = new Audio('test.mp3');
 		audio.play();
+	}
+
+
+	discoMode.onclick = function() {
+		disco();
 	}
 
 	const radius = 150;
