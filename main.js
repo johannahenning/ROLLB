@@ -351,7 +351,6 @@
 
 	elGreen.onclick = function() {
 		setColor(0, 255, 0);
-		square();
 	};
 
 	elBlue.onclick = function() {
