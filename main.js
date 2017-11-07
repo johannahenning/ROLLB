@@ -117,6 +117,9 @@
 		audio.play();
 		setTimeout(function() {
 			setColor(255, 0, 0);
+			setColor(0, 255, 0);
+			setColor(0, 0, 255);
+			setColor(255, 0, 0);
 			roll(Math.round(180), 60, 1);
 		}, 0);
 		setTimeout(function() {
