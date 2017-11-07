@@ -13,21 +13,25 @@
 
 
 	const elConnect = document.querySelector('#connect');
-	const elStop = document.querySelector('#stop');
 	const elAim = document.querySelector('#aim');
 	const elRed = document.querySelector('#red');
 	const elBlue = document.querySelector('#blue');
 	const elGreen = document.querySelector('#green');
 	const elOff = document.querySelector('#off');
-	const elJoypad = document.querySelector('#joypad');
+	//const elJoypad = document.querySelector('#joypad');
 	const moveFront = document.querySelector('#front');
 	const moveBack = document.querySelector('#back');
+	const moveLeft = document.querySelector('#left');
+	const moveRight = document.querySelector('#right');
+	const moveSquare = document.querySelector('#square');
+	const makeSound = document.querySelector('#sound');
+	const discoMode = document.querySelector('#disco');
 
 
 
 	if (navigator.vibrate) {
 		[
-			elConnect, elStop, elAim, elRed, elBlue,
+			elConnect, elAim, elRed, elBlue,
 			elGreen, elOff, moveFront, moveBack
 		].forEach(function(element) {
 			element.addEventListener('touchstart', function(event) {
@@ -87,7 +91,61 @@
 	});
 	};
 
+	//MOVE IN A SQUARE AND STOP
 
+	const square = function(heading, speed, rollState) {
+		roll(Math.round(180), 30, 1);
+		setTimeout(function() {
+			roll(Math.round(90), 30, 1);
+		}, 2000);
+		setTimeout(function() {
+			roll(Math.round(0), 30, 1);
+		}, 4000);
+		setTimeout(function() {
+			roll(Math.round(270), 30, 1);
+		}, 6000);
+		setTimeout(function() {
+			stopRolling();
+			console.log('stopRolling');
+		}, 8000);
+	}
+
+	//DISCO MODE
+
+	const disco = function(heading, speed, rollState) {
+		var audio = new Audio('test.mp3');
+		audio.play();
+		setTimeout(function() {
+			setColor(255, 0, 0);
+		}, 0);
+		setTimeout(function() {
+			roll(Math.round(180), 60, 1);
+		}, 500);
+		setTimeout(function() {
+			setColor(0, 255, 0);
+		}, 1000);
+		setTimeout(function() {
+			roll(Math.round(0), 60, 1);
+		}, 1500);
+		setTimeout(function() {
+			setColor(0, 0, 255);
+		}, 2000);
+		setTimeout(function() {
+			roll(Math.round(180), 60, 1);
+		}, 2500);
+		setTimeout(function() {
+			setColor(0, 0, 0);
+		}, 3000);
+		setTimeout(function() {
+			roll(Math.round(0), 60, 1);
+		}, 3500);
+		setTimeout(function() {
+			stopRolling();
+			console.log('stopRolling');
+		}, 4000);
+	}
+
+	//STOP ROLLING
 
 	const stopRolling = function() {
 		if (state.busy) {
@@ -170,7 +228,9 @@
 	});
 	};
 
-	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
+	// CODE BASED ON https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
+	// CONNECT VIA BLUTOOTH
+
 	function connect() {
 		if (!navigator.bluetooth) {
 			console.log('Web Bluetooth API is not available.\n' +
@@ -178,7 +238,7 @@
 			return;
 		}
 
-		console.log('Requesting BB-8…');
+		console.log('Requesting RollB…');
 
 		const serviceA = '22bb746f-2bb0-7554-2d6f-726568705327';
 		const serviceB = '22bb746f-2ba0-7554-2d6f-726568705327';
@@ -264,10 +324,6 @@
 		connect();
 	};
 
-	elStop.onclick = function() {
-		stopRolling();
-	};
-
 	elAim.onclick = function() {
 		state.aim = !state.aim;
 		if (state.aim) {
@@ -275,31 +331,30 @@
 
 		} else {
 			setBackLed(0).then(() => setHeading(0));
-
-
 		}
 		elAim.classList.toggle('active');
 	};
 
-	elRed.onclick = function() {
-		//setColor(255, 0, 0);
-
-		roll(Math.round(10), 100, 1);
-
-	};
+// BUTTONS AND FUNCTIONS
 
 	moveBack.onclick = function() {
-		//setColor(255, 0, 0);
-
 		roll(Math.round(0), 30, 1);
-
 	};
 
 	moveFront.onclick = function() {
-		//setColor(255, 0, 0);
-
 		roll(Math.round(180), 30, 1);
+	};
 
+	moveLeft.onclick = function() {
+		roll(Math.round(90), 30, 1);
+	};
+
+	moveRight.onclick = function() {
+		roll(Math.round(270), 30, 1);
+	};
+
+	elRed.onclick = function() {
+		setColor(255, 0, 0);
 	};
 
 	elGreen.onclick = function() {
@@ -312,46 +367,20 @@
 
 	elOff.onclick = function() {
 		stopRolling();
-
 	};
 
-	const radius = 150;
-
-	const handleTouchEvent = function(event) {
-		event.preventDefault();
-		if (event.targetTouches.length == 1) {
-			const touch = event.targetTouches[0];
-			const x = touch.clientX - elJoypad.offsetLeft;
-			const y = touch.pageY - elJoypad.offsetTop;
-			// Notes: x and y are swapped here in order to get clockwise theta from Y-axis.
-			const theta = Math.PI - Math.atan2(x - radius, y - radius);
-			const degrees = theta * (180 / Math.PI);
-			const tx = Math.abs(x - radius);
-			const ty = Math.abs(y - radius);
-			let speed = Math.sqrt(Math.pow(tx, 2) + Math.pow(ty, 2));
-			speed = speed / 150.0 * 255.0;
-			console.log('event: ' + x + ', ' + y + ', d: ' + degrees + ' speed: ' + speed);
-			if (state.aim) {
-				roll(Math.round(degrees), 0, 1);
-			} else {
-				roll(Math.round(degrees), Math.round(speed), 1);
-			}
-		}
-	};
-
-	elJoypad.ontouchstart = function(event) {
-		handleTouchEvent(event);
-	};
-
-	elJoypad.ontouchmove = function(event) {
-		handleTouchEvent(event);
+	moveSquare.onclick = function() {
+		square();
 	}
 
-	elJoypad.ontouchend = function(event) {
-		event.preventDefault();
-		stopRolling();
-	};
+	makeSound.onclick = function() {
+		var audio = new Audio('test.mp3');
+		audio.play();
+	}
 
 
+	discoMode.onclick = function() {
+		disco();
+	}
 
 }());

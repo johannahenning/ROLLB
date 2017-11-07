@@ -38,6 +38,12 @@ h1 {
 	margin-bottom: 0;
 }
 
+h2 {
+	text-align: center;
+	font-size: 1.3rem;
+	margin-bottom: 0;
+}
+
 h1 span {
 	display: inline-block;
 	padding-bottom: 0.5em;
@@ -52,13 +58,8 @@ button {
 }
 
 .button-connect {
-	background: #2f453f;
+	background: #ff9900;
 	border-color: #628068;
-}
-
-.button-stop {
-	background: #751729;
-	border-color: #8a161c;
 }
 
 .button-aim {
@@ -108,10 +109,21 @@ button {
 	background: pink;
 }
 
+.button-led-violett::before {
+	background: #8a2be2;
+}
+
+.button-led-black::before {
+	background: black;
+}
+
+.button-led-white::before {
+	background: white;
+}
+
 .button-led-olive::before {
 	background: olive;
 }
-
 
 .button-led-off::before {
 	background: #9fa2a9;
