@@ -120,17 +120,29 @@
 			roll(Math.round(180), 60, 1);
 		}, 0);
 		setTimeout(function() {
+			roll(Math.round(180), 60, 1);
+		}, 500);
+		setTimeout(function() {
 			setColor(0, 255, 0);
 			roll(Math.round(0), 60, 1);
 		}, 1000);
+		setTimeout(function() {
+			roll(Math.round(0), 60, 1);
+		}, 1500);
 		setTimeout(function() {
 			setColor(0, 0, 255);
 			roll(Math.round(180), 60, 1);
 		}, 2000);
 		setTimeout(function() {
+			roll(Math.round(180), 60, 1);
+		}, 2500);
+		setTimeout(function() {
 			setColor(0, 0, 0);
 			roll(Math.round(0), 60, 1);
 		}, 3000);
+		setTimeout(function() {
+			roll(Math.round(0), 60, 1);
+		}, 3500);
 		setTimeout(function() {
 			stopRolling();
 			console.log('stopRolling');
@@ -376,6 +388,8 @@
 	}
 
 	const radius = 150;
+
+
 
 	/*   CONTROLLS VIA TOUCH (NOT NEEDED)
 
