@@ -1,45 +1,35 @@
-(function() {
+'use strict';
 
-	'use strict';
+var mqtt = require('mqtt')
+var client  = mqtt.connect('mqtt://test.mosquitto.org')
+var v_readline = require('readline');
+var v_rl       = v_readline.createInterface
+({ input:  process.stdin,
+	output: process.stdout
+});
 
-	if (
-		location.hostname.endsWith('.github.io') &&
-		location.protocol != 'https:'
-	) {
-		location.protocol = 'https:';
+client.on('connect', function () {
+	client.subscribe('presence')
+	client.publish('presence', 'Hello RollB')
+})
+
+client.on('message', function (topic, message) {
+	// message is Buffer
+	console.log(message.toString())
+	client.end()
+})
+v_rl.setPrompt('Erwarte befehle": ');
+v_rl.prompt();
+
+v_rl.on('line',
+	function(p_input)
+	{ if (p_input === 'c' || p_input === '"c"')
+	{ v_rl.close(); }
+		console.log('dance mode activated, ' );
+	connect();
+		v_rl.prompt();
 	}
-
-
-
-
-	const elConnect = document.querySelector('#connect');
-	const elAim = document.querySelector('#aim');
-	const elRed = document.querySelector('#red');
-	const elBlue = document.querySelector('#blue');
-	const elGreen = document.querySelector('#green');
-	const elOff = document.querySelector('#off');
-	//const elJoypad = document.querySelector('#joypad');
-	const moveFront = document.querySelector('#front');
-	const moveBack = document.querySelector('#back');
-	const moveLeft = document.querySelector('#left');
-	const moveRight = document.querySelector('#right');
-	const moveSquare = document.querySelector('#square');
-	const makeSound = document.querySelector('#sound');
-	const discoMode = document.querySelector('#disco');
-
-
-
-	if (navigator.vibrate) {
-		[
-			elConnect, elAim, elRed, elBlue,
-			elGreen, elOff, moveFront, moveBack
-		].forEach(function(element) {
-			element.addEventListener('touchstart', function(event) {
-				navigator.vibrate(15);
-			});
-		});
-	}
-
+)
 	const state = {
 		'aim': false,
 		'busy': false,
@@ -93,7 +83,7 @@
 
 	//MOVE IN A SQUARE AND STOP
 
-	const square = function(heading, speed, rollState) {
+	const square = function() {
 		roll(Math.round(180), 30, 1);
 		setTimeout(function() {
 			roll(Math.round(90), 30, 1);
@@ -232,11 +222,11 @@
 	// CONNECT VIA BLUTOOTH
 
 	function connect() {
-		if (!navigator.bluetooth) {
+
 			console.log('Web Bluetooth API is not available.\n' +
 				'Please make sure the Web Bluetooth flag is enabled.');
-			return;
-		}
+
+
 
 		console.log('Requesting RollB…');
 
@@ -246,6 +236,7 @@
 		const antiDosCharacteristicId = '22bb746f-2bbd-7554-2d6f-726568705327';
 		const txPowerCharacteristicId = '22bb746f-2bb2-7554-2d6f-726568705327';
 		const wakeCpuCharacteristicId = '22bb746f-2bbf-7554-2d6f-726568705327';
+		bl
 		navigator.bluetooth.requestDevice({
 			'filters': [{ 'namePrefix': ['BB'] }],
 			'optionalServices': [
@@ -320,67 +311,3 @@
 	});
 	};
 
-	elConnect.onclick = function() {
-		connect();
-	};
-
-	elAim.onclick = function() {
-		state.aim = !state.aim;
-		if (state.aim) {
-			setBackLed(0xff).then(() => setColor(0, 0, 0));
-
-		} else {
-			setBackLed(0).then(() => setHeading(0));
-		}
-		elAim.classList.toggle('active');
-	};
-
-// BUTTONS AND FUNCTIONS
-
-	moveBack.onclick = function() {
-		roll(Math.round(0), 30, 1);
-	};
-
-	moveFront.onclick = function() {
-		roll(Math.round(180), 30, 1);
-	};
-
-	moveLeft.onclick = function() {
-		roll(Math.round(90), 30, 1);
-	};
-
-	moveRight.onclick = function() {
-		roll(Math.round(270), 30, 1);
-	};
-
-	elRed.onclick = function() {
-		setColor(255, 0, 0);
-	};
-
-	elGreen.onclick = function() {
-		setColor(0, 255, 0);
-	};
-
-	elBlue.onclick = function() {
-		setColor(0, 0, 255);
-	};
-
-	elOff.onclick = function() {
-		stopRolling();
-	};
-
-	moveSquare.onclick = function() {
-		square();
-	}
-
-	makeSound.onclick = function() {
-		var audio = new Audio('test.mp3');
-		audio.play();
-	}
-
-
-	discoMode.onclick = function() {
-		disco();
-	}
-
-}());
