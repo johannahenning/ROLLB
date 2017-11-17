@@ -1,16 +1,17 @@
 * {
-	-webkit-tap-highlight-color: transparent;
+	-webkit-tap-highlight-color: black;
 }
 
 html, button {
 	text-transform: uppercase;
 	font-weight: bold;
-	color: #fff;
+	color: #cc4c30;
 	font-family: sans-serif;
+
 }
 
 html {
-	background: #282c37;
+	background: #8a8e99;
 }
 
 h1,
@@ -26,10 +27,6 @@ div {
 	justify-content: space-around;
 	align-content: center;
 	align-items: center;
-}
-
-main {
-	background: linear-gradient(#444957, #282c38);
 }
 
 h1 {
@@ -51,15 +48,18 @@ h1 span {
 }
 
 button {
-	background: #2f453f;
-	border: 1px solid #628068;
+	background: #ffa67a;
+	border: 1px solid #ffa67a;
 	border-radius: 58px;
 	padding: 1em 3em;
+	font-size:120%;
 }
 
 .button-connect {
-	background: #ff9900;
-	border-color: #628068;
+	background: #cc4c30;
+	border-color: #cc4c30;
+	color: #ffa67a;
+	font-size:150%;
 }
 
 .button-led {
@@ -89,35 +89,15 @@ button {
 }
 
 .button-led-red::before {
-	background: #fa2e2e;
+	background: #fa0012;
 }
 
 .button-led-green::before {
-	background: #6df99a;
+	background: #00f923;
 }
 
 .button-led-blue::before {
-	background: #58a7e2;
-}
-
-.button-pink::before {
-	background: pink;
-}
-
-.button-violett::before {
-	background: #8a2be2;
-}
-
-.button-black::before {
-	background: black;
-}
-
-.button-white::before {
-	background: white;
-}
-
-.button-olive::before {
-	background: olive;
+	background: #0045e2;
 }
 
 .button-off::before {
