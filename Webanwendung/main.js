@@ -161,6 +161,15 @@
 	});
 	};
 
+	const setBackLed = function(brightness) {
+	console.log('Set back led to ' + brightness);
+	const did = 0x02; // Virtual device ID
+	const cid = 0x21; // Set RGB LED Output command
+	// Color command data: red, green, blue, flag
+	const data = new Uint8Array([brightness]);
+	return sendCommand(did, cid, data);
+};
+
 	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
 	const sendCommand = function(did, cid, data) {
 		// Create client command packets
