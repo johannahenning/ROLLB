@@ -1,40 +1,47 @@
 <!DOCTYPE html>
-
+<meta charset="utf-8">
 <title>RollB Control</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
 <link rel="stylesheet" href="main.css">
+<link rel="manifest" href="bb8.webmanifest">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- Origin Trial Token, feature = Web Bluetooth, origin = https://operasoftware.github.io, expires = 2017-01-24 -->
+<meta http-equiv="origin-trial" data-feature="Web Bluetooth" data-expires="2017-01-24" content="Aht/Eh3TdOHu39rmMwSz5DdQKpsplWM9OPV6mEq1ZjZK5E3FWs7Jl/bv3W3ggHVBekI6pAAx/fq0fdiPKKPeRQYAAABdeyJvcmlnaW4iOiJodHRwczovL29wZXJhc29mdHdhcmUuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJXZWJCbHVldG9vdGgiLCJleHBpcnkiOjE0ODUzMDIzOTl9">
 
 <h1><span>RollB Control</span></h1>
-
 <div>
-	<!--button to open connect-interface-->
 	<button class="button-connect" id="connect">Connect</button>
 </div>
 
 <main>
-	<!--buttons to use different led-colours-->
-	<button class="button button-red" id="red">Red</button>
-	<button class="button button-blue" id="blue">Blue</button>
-	<button class="button button-green" id="green">Green</button>
-</main><br><br>
+	<button class="button-aim" id="aim">Aim</button>
+	<button class="button-led button-led-red" id="red">Red</button>
+	<button class="button-led button-led-blue" id="blue">Blue</button>
+	<button class="button-led button-led-green" id="green">Green</button>
+</main>
 
-<center>
-	<!--buttons to move in four directions-->
-	<h1>Controlls</h1><br>
-	<button class="button button-olive" id="front">Front</button><br><br>
-	<button class="button button-violett" id="left">Left</button>&nbsp;&nbsp;
-	<button class="button button-off" id="off">Off</button>&nbsp;&nbsp;
-	<button class="button button-black" id="right">Right</button><br><br>
-	<button class="button button-pink" id="back">Back</button><br><br>
 
-	<!--button to play test-soundfile-->
-	<h1>Make Sound</h1><br>
-	<button class="button button-white" id="sound">Sound</button><br><br>
 
-	<!--buttons to start test-methods-->
-	<h1>Move Square</h1><br>
-	<button class="button button-white" id="square">Square</button><br><br>
-	<h1>Disco Mode</h1><br>
-	<button class="button button-white" id="disco">Disco</button>
-</center>
+<br><br>
+	<center>
+		<h1>Controlls</h1><br>
+		<button class="button-led button-led-olive" id="front">Front</button><br><br>
+		<button class="button-led button-led-violett" id="left">Left</button>&nbsp;&nbsp;
+		<button class="button-led button-led-off" id="off">Off</button>&nbsp;&nbsp;
+		<button class="button-led button-led-black" id="right">Right</button><br><br>
+		&nbsp;<button class="button-led button-led-pink" id="back">Back</button>
+		<br><br>
+		<h1>Make Sound</h1><br>
+		<button class="button-led button-led-white" id="sound">Sound</button>
+		<br><br>
+		<h1>Move Square</h1><br>
+		<button class="button-led button-led-white" id="square">Square</button>
+		<br><br>
+		<h1>Disco Mode</h1><br>
+		<button class="button-led button-led-white" id="disco">Disco</button>
+	</center>
 
-<script async src="main.js"></script><br><br><br>
+<script async src="main.js"></script>
+
+<br><br><br>

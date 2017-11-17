@@ -378,6 +378,7 @@
 		audio.play();
 	}
 
+
 	discoMode.onclick = function() {
 		disco();
 	}
