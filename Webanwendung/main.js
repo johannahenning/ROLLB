@@ -15,10 +15,24 @@
 	const makeSound = document.querySelector('#sound');
 	const discoMode = document.querySelector('#disco');
 
+	if (navigator.vibrate) {
+			[
+				elConnect, elRed, elBlue,
+				elGreen, elOff, moveFront, moveBack
+			].forEach(function(element) {
+				element.addEventListener('touchstart', function(event) {
+					navigator.vibrate(15);
+				});
+			});
+		}
+
+
 	const state = {
 		'busy': false,
 		'sequence': 0,
 	};
+
+
 
 	let controlCharacteristic;
 	let coreHeading;
