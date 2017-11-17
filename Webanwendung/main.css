@@ -100,27 +100,27 @@ button {
 	background: #58a7e2;
 }
 
-.button-led-pink::before {
+.button-pink::before {
 	background: pink;
 }
 
-.button-led-violett::before {
+.button-violett::before {
 	background: #8a2be2;
 }
 
-.button-led-black::before {
+.button-black::before {
 	background: black;
 }
 
-.button-led-white::before {
+.button-white::before {
 	background: white;
 }
 
-.button-led-olive::before {
+.button-olive::before {
 	background: olive;
 }
 
-.button-led-off::before {
+.button-off::before {
 	background: #9fa2a9;
 }
 

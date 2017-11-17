@@ -2,22 +2,11 @@
 
 	'use strict';
 
-	if (
-		location.hostname.endsWith('.github.io') &&
-		location.protocol != 'https:'
-	) {
-		location.protocol = 'https:';
-	}
-
-
-
-
 	const elConnect = document.querySelector('#connect');
 	const elRed = document.querySelector('#red');
 	const elBlue = document.querySelector('#blue');
 	const elGreen = document.querySelector('#green');
 	const elOff = document.querySelector('#off');
-	//const elJoypad = document.querySelector('#joypad');
 	const moveFront = document.querySelector('#front');
 	const moveBack = document.querySelector('#back');
 	const moveLeft = document.querySelector('#left');
@@ -25,8 +14,6 @@
 	const moveSquare = document.querySelector('#square');
 	const makeSound = document.querySelector('#sound');
 	const discoMode = document.querySelector('#disco');
-
-
 
 	if (navigator.vibrate) {
 		[
@@ -227,7 +214,7 @@
 	};
 
 	// CODE BASED ON https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
-	// CONNECT VIA BLUTOOTH
+	// CONNECT VIA BLUETOOTH
 
 	function connect() {
 		if (!navigator.bluetooth) {
@@ -247,8 +234,8 @@
 		navigator.bluetooth.requestDevice({
 			'filters': [{ 'namePrefix': ['BB'] }],
 			'optionalServices': [
-				serviceA,
-				serviceB
+				serviceB,
+				serviceA
 			]
 		})
 			.then(device => {
