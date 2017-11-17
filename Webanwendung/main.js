@@ -13,7 +13,6 @@
 
 
 	const elConnect = document.querySelector('#connect');
-	const elAim = document.querySelector('#aim');
 	const elRed = document.querySelector('#red');
 	const elBlue = document.querySelector('#blue');
 	const elGreen = document.querySelector('#green');
@@ -31,7 +30,7 @@
 
 	if (navigator.vibrate) {
 		[
-			elConnect, elAim, elRed, elBlue,
+			elConnect, elRed, elBlue,
 			elGreen, elOff, moveFront, moveBack
 		].forEach(function(element) {
 			element.addEventListener('touchstart', function(event) {
@@ -41,7 +40,6 @@
 	}
 
 	const state = {
-		'aim': false,
 		'busy': false,
 		'sequence': 0,
 	};
@@ -324,16 +322,6 @@
 		connect();
 	};
 
-	elAim.onclick = function() {
-		state.aim = !state.aim;
-		if (state.aim) {
-			setBackLed(0xff).then(() => setColor(0, 0, 0));
-
-		} else {
-			setBackLed(0).then(() => setHeading(0));
-		}
-		elAim.classList.toggle('active');
-	};
 
 // BUTTONS AND FUNCTIONS
 
