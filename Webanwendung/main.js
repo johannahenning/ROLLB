@@ -2,11 +2,23 @@
 
 	'use strict';
 
+	if (
+		location.hostname.endsWith('.github.io') &&
+		location.protocol != 'https:'
+	) {
+		location.protocol = 'https:';
+	}
+
+
+
+
 	const elConnect = document.querySelector('#connect');
+	const elAim = document.querySelector('#aim');
 	const elRed = document.querySelector('#red');
 	const elBlue = document.querySelector('#blue');
 	const elGreen = document.querySelector('#green');
 	const elOff = document.querySelector('#off');
+	//const elJoypad = document.querySelector('#joypad');
 	const moveFront = document.querySelector('#front');
 	const moveBack = document.querySelector('#back');
 	const moveLeft = document.querySelector('#left');
@@ -15,24 +27,24 @@
 	const makeSound = document.querySelector('#sound');
 	const discoMode = document.querySelector('#disco');
 
-	if (navigator.vibrate) {
-			[
-				elConnect, elRed, elBlue,
-				elGreen, elOff, moveFront, moveBack
-			].forEach(function(element) {
-				element.addEventListener('touchstart', function(event) {
-					navigator.vibrate(15);
-				});
-			});
-		}
 
+
+	if (navigator.vibrate) {
+		[
+			elConnect, elAim, elRed, elBlue,
+			elGreen, elOff, moveFront, moveBack
+		].forEach(function(element) {
+			element.addEventListener('touchstart', function(event) {
+				navigator.vibrate(15);
+			});
+		});
+	}
 
 	const state = {
+		'aim': false,
 		'busy': false,
 		'sequence': 0,
 	};
-
-
 
 	let controlCharacteristic;
 	let coreHeading;
@@ -51,13 +63,14 @@
 		const data = new Uint16Array([heading]);
 
 		sendCommand(did, cid, data).then(() => {
-				state.busy = false;
-		})
-		.catch(exception => {
-		console.log(exception);
-		});
+			state.busy = false;
+	})
+	.catch(exception => {
+			console.log(exception);
+	});
 	};
 
+	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
 	const roll = function(heading, speed, rollState) {
 		console.log('Roll heading=' + heading + ', speed=' + speed);
 		if (state.busy) {
@@ -155,6 +168,15 @@
 	});
 	};
 
+	const setBackLed = function(brightness) {
+		console.log('Set back led to ' + brightness);
+		const did = 0x02; // Virtual device ID
+		const cid = 0x21; // Set RGB LED Output command
+		// Color command data: red, green, blue, flag
+		const data = new Uint8Array([brightness]);
+		return sendCommand(did, cid, data);
+	};
+
 	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
 	const setColor = function(r, g, b) {
 		console.log('Set color: r='+r+',g='+g+',b='+b);
@@ -174,15 +196,6 @@
 			console.log(exception);
 	});
 	};
-
-	const setBackLed = function(brightness) {
-	console.log('Set back led to ' + brightness);
-	const did = 0x02; // Virtual device ID
-	const cid = 0x21; // Set RGB LED Output command
-	// Color command data: red, green, blue, flag
-	const data = new Uint8Array([brightness]);
-	return sendCommand(did, cid, data);
-};
 
 	// Code based on https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
 	const sendCommand = function(did, cid, data) {
@@ -309,6 +322,17 @@
 
 	elConnect.onclick = function() {
 		connect();
+	};
+
+	elAim.onclick = function() {
+		state.aim = !state.aim;
+		if (state.aim) {
+			setBackLed(0xff).then(() => setColor(0, 0, 0));
+
+		} else {
+			setBackLed(0).then(() => setHeading(0));
+		}
+		elAim.classList.toggle('active');
 	};
 
 // BUTTONS AND FUNCTIONS
