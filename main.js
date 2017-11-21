@@ -1,5 +1,5 @@
 'use strict';
-
+var noble = require('./index');
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://test.mosquitto.org')
 var v_readline = require('readline');
@@ -8,16 +8,121 @@ var v_rl       = v_readline.createInterface
 	output: process.stdout
 });
 
-client.on('connect', function () {
-	client.subscribe('presence')
-	client.publish('presence', 'Hello RollB')
-})
 
-client.on('message', function (topic, message) {
-	// message is Buffer
-	console.log(message.toString())
-	client.end()
-})
+console.log('noble');
+
+noble.on('stateChange', function(state) {
+	console.log('on -> stateChange: ' + state);
+
+	if (state === 'poweredOn') {
+		noble.startScanning();
+	} else {
+		noble.stopScanning();
+	}
+});
+
+noble.on('scanStart', function() {
+	console.log('on -> scanStart');
+});
+
+noble.on('scanStop', function() {
+	console.log('on -> scanStop');
+});
+
+
+
+noble.on('discover', function(peripheral) {
+	console.log('on -> discover: ' + peripheral);
+
+	noble.stopScanning();
+
+	peripheral.on('connect', function() {
+		console.log('on -> connect');
+		this.updateRssi();
+	});
+
+	peripheral.on('disconnect', function() {
+		console.log('on -> disconnect');
+	});
+
+	peripheral.on('rssiUpdate', function(rssi) {
+		console.log('on -> RSSI update ' + rssi);
+		this.discoverServices();
+	});
+
+	peripheral.on('servicesDiscover', function(services) {
+		console.log('on -> peripheral services discovered ' + services);
+
+		var serviceIndex = 0;
+
+		services[serviceIndex].on('includedServicesDiscover', function(includedServiceUuids) {
+			console.log('on -> service included services discovered ' + includedServiceUuids);
+			this.discoverCharacteristics();
+		});
+
+		services[serviceIndex].on('characteristicsDiscover', function(characteristics) {
+			console.log('on -> service characteristics discovered ' + characteristics);
+
+			var characteristicIndex = 0;
+
+			characteristics[characteristicIndex].on('read', function(data, isNotification) {
+				console.log('on -> characteristic read ' + data + ' ' + isNotification);
+				console.log(data);
+
+				peripheral.disconnect();
+			});
+
+			characteristics[characteristicIndex].on('write', function() {
+				console.log('on -> characteristic write ');
+
+				peripheral.disconnect();
+			});
+
+			characteristics[characteristicIndex].on('broadcast', function(state) {
+				console.log('on -> characteristic broadcast ' + state);
+
+				peripheral.disconnect();
+			});
+
+			characteristics[characteristicIndex].on('notify', function(state) {
+				console.log('on -> characteristic notify ' + state);
+
+				peripheral.disconnect();
+			});
+
+			characteristics[characteristicIndex].on('descriptorsDiscover', function(descriptors) {
+				console.log('on -> descriptors discover ' + descriptors);
+
+				var descriptorIndex = 0;
+
+				descriptors[descriptorIndex].on('valueRead', function(data) {
+					console.log('on -> descriptor value read ' + data);
+					console.log(data);
+					peripheral.disconnect();
+				});
+
+				descriptors[descriptorIndex].on('valueWrite', function() {
+					console.log('on -> descriptor value write ');
+					peripheral.disconnect();
+				});
+
+				descriptors[descriptorIndex].readValue();
+			});
+
+
+			characteristics[characteristicIndex].read();
+		});
+
+
+		services[serviceIndex].discoverIncludedServices();
+	});
+
+	peripheral.connect();
+});
+
+
+
+
 v_rl.setPrompt('Erwarte befehle": ');
 v_rl.prompt();
 
@@ -26,7 +131,8 @@ v_rl.on('line',
 	{ if (p_input === 'c' || p_input === '"c"')
 	{ v_rl.close(); }
 		console.log('dance mode activated, ' );
-	connect();
+		peripheral.connect([callback(error)]);
+
 		v_rl.prompt();
 	}
 )
@@ -213,14 +319,15 @@ v_rl.on('line',
 		array.set(data, packets.byteLength);
 		array.set(checksum, packets.byteLength + data.byteLength);
 		console.log('Sending', array);
-		return controlCharacteristic.writeValue(array).then(() => {
+		return descriptor.writeValue(array).then(() => {
+			//hier wird der blue command geschickt
 			console.log('Command write done.');
 	});
 	};
 
 	// CODE BASED ON https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
 	// CONNECT VIA BLUTOOTH
-
+/*
 	function connect() {
 
 			console.log('Web Bluetooth API is not available.\n' +
@@ -310,4 +417,7 @@ v_rl.on('line',
 			console.log(exception);
 	});
 	};
+
+	*/
+
 
