@@ -317,7 +317,7 @@
 	};
 
 	moveFront.onclick = function() {
-		roll(Math.round(180), 30, 1);
+		roll(180, 30, 1);
 	};
 
 	moveLeft.onclick = function() {
