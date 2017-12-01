@@ -79,15 +79,15 @@
 	//MOVE IN A SQUARE AND STOP
 
 	const square = function(heading, speed, rollState) {
-		roll(Math.round(180), 30, 1);
+		roll(180, 30, 1);
 		setTimeout(function() {
-			roll(Math.round(90), 30, 1);
+			roll(90, 30, 1);
 		}, 2000);
 		setTimeout(function() {
-			roll(Math.round(0), 30, 1);
+			roll(0, 30, 1);
 		}, 4000);
 		setTimeout(function() {
-			roll(Math.round(270), 30, 1);
+			roll(270, 30, 1);
 		}, 6000);
 		setTimeout(function() {
 			stopRolling();
@@ -104,25 +104,25 @@
 			setColor(255, 0, 0);
 		}, 0);
 		setTimeout(function() {
-			roll(Math.round(180), 60, 1);
+			roll(180, 60, 1);
 		}, 500);
 		setTimeout(function() {
 			setColor(0, 255, 0);
 		}, 1000);
 		setTimeout(function() {
-			roll(Math.round(0), 60, 1);
+			roll(0, 60, 1);
 		}, 1500);
 		setTimeout(function() {
 			setColor(0, 0, 255);
 		}, 2000);
 		setTimeout(function() {
-			roll(Math.round(180), 60, 1);
+			roll(180, 60, 1);
 		}, 2500);
 		setTimeout(function() {
 			setColor(0, 0, 0);
 		}, 3000);
 		setTimeout(function() {
-			roll(Math.round(0), 60, 1);
+			roll(0, 60, 1);
 		}, 3500);
 		setTimeout(function() {
 			stopRolling();
@@ -313,7 +313,7 @@
 // BUTTONS AND FUNCTIONS
 
 	moveBack.onclick = function() {
-		roll(Math.round(0), 30, 1);
+		roll(0, 30, 1);
 	};
 
 	moveFront.onclick = function() {
@@ -321,11 +321,11 @@
 	};
 
 	moveLeft.onclick = function() {
-		roll(Math.round(90), 30, 1);
+		roll(90, 30, 1);
 	};
 
 	moveRight.onclick = function() {
-		roll(Math.round(270), 30, 1);
+		roll(270, 30, 1);
 	};
 
 	elRed.onclick = function() {

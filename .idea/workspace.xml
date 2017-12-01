@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0edec1d-6e4b-4921-951c-24e8c0dab77a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webanwendung/index.html" afterPath="$PROJECT_DIR$/Webanwendung/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Webanwendung/main.js" afterPath="$PROJECT_DIR$/Webanwendung/main.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,8 +36,8 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Webanwendung/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="319" column="25" lean-forward="true" selection-start-line="319" selection-start-column="25" selection-end-line="319" selection-end-column="25" />
+            <state relative-caret-position="229">
+              <caret line="104" column="14" lean-forward="true" selection-start-line="104" selection-start-column="14" selection-end-line="104" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -78,6 +76,7 @@
       <find>docume</find>
       <find>coreHeading</find>
       <find>roll</find>
+      <find>Math</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -276,12 +275,12 @@
       <workItem from="1510919205850" duration="5623000" />
       <workItem from="1511268341043" duration="923000" />
       <workItem from="1511269874851" duration="170000" />
-      <workItem from="1512116688149" duration="7073000" />
+      <workItem from="1512116688149" duration="7905000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14458000" />
+    <option name="totallyTimeSpent" value="15290000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1513" height="973" extended-state="6" />
@@ -531,8 +530,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Webanwendung/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="319" column="25" lean-forward="true" selection-start-line="319" selection-start-column="25" selection-end-line="319" selection-end-column="25" />
+        <state relative-caret-position="229">
+          <caret line="104" column="14" lean-forward="true" selection-start-line="104" selection-start-column="14" selection-end-line="104" selection-end-column="14" />
           <folding />
         </state>
       </provider>
