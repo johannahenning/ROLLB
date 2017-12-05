@@ -1,12 +1,7 @@
 'use strict';
 var noble = require('./index');
 var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://test.mosquitto.org')
-var v_readline = require('readline');
-var v_rl       = v_readline.createInterface
-({ input:  process.stdin,
-	output: process.stdout
-});
+
 
 
 console.log('noble');
@@ -32,6 +27,9 @@ noble.on('scanStop', function() {
 
 
 noble.on('discover', function(peripheral) {
+	if(peripheral.id=='244b03e895af'){
+		console.log('year it worked!');
+	}
 	console.log('on -> discover: ' + peripheral);
 
 	noble.stopScanning();
@@ -120,22 +118,6 @@ noble.on('discover', function(peripheral) {
 	peripheral.connect();
 });
 
-
-
-
-v_rl.setPrompt('Erwarte befehle": ');
-v_rl.prompt();
-
-v_rl.on('line',
-	function(p_input)
-	{ if (p_input === 'c' || p_input === '"c"')
-	{ v_rl.close(); }
-		console.log('dance mode activated, ' );
-		peripheral.connect([callback(error)]);
-
-		v_rl.prompt();
-	}
-)
 	const state = {
 		'aim': false,
 		'busy': false,
