@@ -1,6 +1,8 @@
 'use strict';
 var noble = require('./index');
 var mqtt = require('mqtt')
+let bb8D =null;
+
 
 
 
@@ -27,12 +29,13 @@ noble.on('scanStop', function() {
 
 
 noble.on('discover', function(peripheral) {
-	if(peripheral.id=='244b03e895af'){
+	if(peripheral.id=='ef5b943330b9'){
 		console.log('year it worked!');
+		noble.stopScanning();
 	}
 	console.log('on -> discover: ' + peripheral);
 
-	noble.stopScanning();
+
 
 	peripheral.on('connect', function() {
 		console.log('on -> connect');
@@ -116,6 +119,11 @@ noble.on('discover', function(peripheral) {
 	});
 
 	peripheral.connect();
+	if(peripheral.id=='ef5b943330b9'){
+		console.log('year it worked!in perifal is the bb8');
+
+	}
+
 });
 
 	const state = {
@@ -301,11 +309,20 @@ noble.on('discover', function(peripheral) {
 		array.set(data, packets.byteLength);
 		array.set(checksum, packets.byteLength + data.byteLength);
 		console.log('Sending', array);
-		return descriptor.writeValue(array).then(() => {
+	//	bb8.send(array);
+		characteristic.write(array, false, function (error) {
+			if (!error) {
+			// write succesfull
+			} else {
+			// write unsuccessfull
+			}
+		}.bind(this));
+	//	return descriptors.writeValue(array).then(() => {
 			//hier wird der blue command geschickt
-			console.log('Command write done.');
-	});
+	//		console.log('Command write done.');
+	//	});
 	};
+	setColor(255,255,255);
 
 	// CODE BASED ON https://github.com/WebBluetoothCG/demos/blob/gh-pages/bluetooth-toy-bb8/index.html
 	// CONNECT VIA BLUTOOTH
