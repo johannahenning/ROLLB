@@ -6,7 +6,7 @@ var keypress = require("keypress");
 
     Cylon.robot({
       connections: {
-        bluetooth: { adaptor: 'central', uuid: '4e51973b007a40db9e45a207c39a8065', module: 'cylon-ble'}
+        bluetooth: { adaptor: 'central', uuid: 'ef5b943330b9', module: 'cylon-ble'}
       },
 
       devices: {
